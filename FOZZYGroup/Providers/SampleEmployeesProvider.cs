@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using FOZZYGroup.Types;
 
-namespace FOZZYGroup
+namespace FOZZYGroup.Providers
 {
-	internal class SampleEmployeesProvider
+	internal class SampleEmployeesProvider : IEmployeesProvider
 	{
-		static readonly ReadOnlyCollection<Employee> employees;
-
-		SampleEmployeesProvider() { }
-
-		static SampleEmployeesProvider()
+		public IEnumerable<Employee> GetEmployees()
 		{
-			var temp = new List<Employee>
+			return new List<Employee>
 			{
 				new FixedSalaryEmployee
 				{
@@ -56,13 +52,6 @@ namespace FOZZYGroup
 					Salary = 800m
 				},
 			};
-
-			employees = temp.AsReadOnly();
-		}
-
-		public static ReadOnlyCollection<Employee> GetEmployees()
-		{
-			return employees;
 		}
 	}
 }

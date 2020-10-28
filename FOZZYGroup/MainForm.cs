@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using FOZZYGroup.Controllers;
+using FOZZYGroup.Providers;
 
 namespace FOZZYGroup
 {
@@ -15,7 +17,13 @@ namespace FOZZYGroup
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			controller = new EmployeesController();
+			controller.OnUpdate += Controller_OnUpdate;
 
+			controller.Fill(new SampleEmployeesProvider());
+		}
+
+		private void Controller_OnUpdate(object sender, EventArgs e)
+		{
 			RefreshItems();
 		}
 
@@ -31,11 +39,7 @@ namespace FOZZYGroup
 		private void textBoxLoad_Click(object sender, EventArgs e)
 		{
 			if (controller.TryLoadFromFile(out string fileName))
-			{
 				textBoxLoad.Text = fileName;
-
-				RefreshItems();
-			}
 		}
 
 		private void buttonSave_Click(object sender, EventArgs e)

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using System.Security;
+using FOZZYGroup.Types;
 
-namespace FOZZYGroup
+namespace FOZZYGroup.Extensions
 {
 	internal static class ExtensionMethods
 	{

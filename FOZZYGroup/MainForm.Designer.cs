@@ -44,41 +44,43 @@
 			this.groupBoxFirstFive.Controls.Add(this.listBoxFirstFive);
 			this.groupBoxFirstFive.Location = new System.Drawing.Point(12, 12);
 			this.groupBoxFirstFive.Name = "groupBoxFirstFive";
-			this.groupBoxFirstFive.Size = new System.Drawing.Size(339, 426);
+			this.groupBoxFirstFive.Size = new System.Drawing.Size(251, 197);
 			this.groupBoxFirstFive.TabIndex = 0;
 			this.groupBoxFirstFive.TabStop = false;
 			this.groupBoxFirstFive.Text = "Первые пять";
 			// 
 			// listBoxFirstFive
 			// 
+			this.listBoxFirstFive.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.listBoxFirstFive.FormattingEnabled = true;
-			this.listBoxFirstFive.Location = new System.Drawing.Point(6, 19);
+			this.listBoxFirstFive.Location = new System.Drawing.Point(3, 16);
 			this.listBoxFirstFive.Name = "listBoxFirstFive";
-			this.listBoxFirstFive.Size = new System.Drawing.Size(327, 394);
+			this.listBoxFirstFive.Size = new System.Drawing.Size(245, 178);
 			this.listBoxFirstFive.TabIndex = 0;
 			// 
 			// groupBoxLastThree
 			// 
 			this.groupBoxLastThree.Controls.Add(this.listBoxLastThree);
-			this.groupBoxLastThree.Location = new System.Drawing.Point(357, 12);
+			this.groupBoxLastThree.Location = new System.Drawing.Point(269, 12);
 			this.groupBoxLastThree.Name = "groupBoxLastThree";
-			this.groupBoxLastThree.Size = new System.Drawing.Size(339, 426);
+			this.groupBoxLastThree.Size = new System.Drawing.Size(251, 197);
 			this.groupBoxLastThree.TabIndex = 1;
 			this.groupBoxLastThree.TabStop = false;
 			this.groupBoxLastThree.Text = "Последние три";
 			// 
 			// listBoxLastThree
 			// 
+			this.listBoxLastThree.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.listBoxLastThree.FormattingEnabled = true;
-			this.listBoxLastThree.Location = new System.Drawing.Point(6, 19);
+			this.listBoxLastThree.Location = new System.Drawing.Point(3, 16);
 			this.listBoxLastThree.Name = "listBoxLastThree";
-			this.listBoxLastThree.Size = new System.Drawing.Size(327, 394);
+			this.listBoxLastThree.Size = new System.Drawing.Size(245, 178);
 			this.listBoxLastThree.TabIndex = 0;
 			// 
 			// textBoxLoad
 			// 
 			this.textBoxLoad.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.textBoxLoad.Location = new System.Drawing.Point(713, 50);
+			this.textBoxLoad.Location = new System.Drawing.Point(539, 44);
 			this.textBoxLoad.Name = "textBoxLoad";
 			this.textBoxLoad.ReadOnly = true;
 			this.textBoxLoad.Size = new System.Drawing.Size(224, 20);
@@ -88,7 +90,7 @@
 			// labelLoad
 			// 
 			this.labelLoad.AutoSize = true;
-			this.labelLoad.Location = new System.Drawing.Point(710, 34);
+			this.labelLoad.Location = new System.Drawing.Point(536, 28);
 			this.labelLoad.Name = "labelLoad";
 			this.labelLoad.Size = new System.Drawing.Size(112, 13);
 			this.labelLoad.TabIndex = 3;
@@ -96,7 +98,7 @@
 			// 
 			// buttonSave
 			// 
-			this.buttonSave.Location = new System.Drawing.Point(713, 76);
+			this.buttonSave.Location = new System.Drawing.Point(539, 70);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(224, 24);
 			this.buttonSave.TabIndex = 4;
@@ -108,13 +110,15 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(949, 450);
+			this.ClientSize = new System.Drawing.Size(782, 219);
 			this.Controls.Add(this.buttonSave);
 			this.Controls.Add(this.labelLoad);
 			this.Controls.Add(this.textBoxLoad);
 			this.Controls.Add(this.groupBoxLastThree);
 			this.Controls.Add(this.groupBoxFirstFive);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "MainForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Задание №1";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.groupBoxFirstFive.ResumeLayout(false);

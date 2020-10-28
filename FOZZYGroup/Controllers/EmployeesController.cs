@@ -2,38 +2,62 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using FOZZYGroup.Providers;
+using FOZZYGroup.Types;
+using FOZZYGroup.Extensions;
 
-namespace FOZZYGroup
+namespace FOZZYGroup.Controllers
 {
 	internal class EmployeesController
 	{
+		public event EventHandler OnUpdate;
+
 		const string FilesFilter = "Xml files (*.xml)|*.xml|All files (*.*)|*.*";
 
-		List<Employee> employees;
+		protected List<Employee> employees;
 
-		public EmployeesController()
+		protected List<Employee> Employees
 		{
-			employees = SampleEmployeesProvider.GetEmployees().ToList();
+			get => employees;
+			set
+			{
+				employees = value;
 
-			Update();
+				Update();
+			}
+		}
+
+		public void Fill(IEmployeesProvider employeesProvider)
+		{
+			Employees = employeesProvider.GetEmployees().ToList();
 		}
 
 		public void Update()
 		{
-			employees.Sort();
-			employees.Reverse();
+			try
+			{
+				if (employees == null)
+					return;
+
+				employees.Sort();
+				employees.Reverse();
+			}
+			finally
+			{
+				OnUpdate?.Invoke(this, EventArgs.Empty);
+			}
 		}
 
 		public Employee[] GetFirstFive()
 		{
-			return employees
+			return employees?
 				.Take(5)
 				.ToArray();
 		}
 
 		public Employee[] GetLastThree()
 		{
-			return employees
+			return employees?
 				.Skip(employees.Count - 3)
 				.ToArray();
 		}
@@ -42,32 +66,31 @@ namespace FOZZYGroup
 		{
 			fileName = null;
 			
-			OpenFileDialog dialog = new OpenFileDialog
+			using (OpenFileDialog dialog = new OpenFileDialog
 			{
 				Filter = FilesFilter,
-				FilterIndex = 2,
+				FilterIndex = 1,
 				RestoreDirectory = true,
 				CheckFileExists = true,
 				CheckPathExists = true
-			};
-
-			if (dialog.ShowDialog() != DialogResult.OK)
-				return false;
-
-			fileName = dialog.FileName;
-
-			try
+			})
 			{
-				employees = Employee.LoadFromFile(fileName);
-			}
-			catch(Exception e)
-			{
-				ShowError(e);
+				if (dialog.ShowDialog() != DialogResult.OK)
+					return false;
 
-				return false;
-			}
+				fileName = dialog.FileName;
 
-			Update();
+				try
+				{
+					Employees = Employee.LoadFromFile(fileName);
+				}
+				catch(Exception e)
+				{
+					ShowError(e);
+
+					return false;
+				}
+			}
 
 			return true;
 		}
@@ -76,29 +99,30 @@ namespace FOZZYGroup
 		{
 			fileName = null;
 
-			SaveFileDialog dialog = new SaveFileDialog
+			using(SaveFileDialog dialog = new SaveFileDialog
 			{
 				Filter = FilesFilter,
-				FilterIndex = 2,
+				FilterIndex = 1,
 				RestoreDirectory = true,
 				AddExtension = true,
 				DefaultExt = "xml"
-			};
-
-			if (dialog.ShowDialog() != DialogResult.OK)
-				return false;
-
-			fileName = dialog.FileName;
-
-			try
+			})
 			{
-				employees.SaveToFile(fileName);
-			}
-			catch(Exception e)
-			{
-				ShowError(e);
+				if (dialog.ShowDialog() != DialogResult.OK)
+					return false;
 
-				return false;
+				fileName = dialog.FileName;
+
+				try
+				{
+					employees.SaveToFile(fileName);
+				}
+				catch(Exception e)
+				{
+					ShowError(e);
+
+					return false;
+				}
 			}
 
 			return true;

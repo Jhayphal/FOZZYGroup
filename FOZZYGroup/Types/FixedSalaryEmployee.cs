@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FOZZYGroup
+namespace FOZZYGroup.Types
 {
 	/// <summary>
 	/// Работник с фиксированной заработной платой.
